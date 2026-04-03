@@ -5,7 +5,7 @@ const ticketRoutes = require("./routes/ticketRoutes");
 import type { Request, Response} from "express";
 
 // middleware to parse JSON
-// app.use(express.json());
+app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("API is running...");
