@@ -5,6 +5,6 @@ const { getTicketById, getTickets, createTicket } = require("../controllers/tick
 
 router.get("/", getTickets);
 router.get("/:id", getTicketById);
-router.post("/:id", createTicket);
+router.post("/", createTicket);
 
 module.exports = router;
