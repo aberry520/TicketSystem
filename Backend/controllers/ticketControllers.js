@@ -14,3 +14,14 @@ exports.getTicketById = (req, res) => {
   }
   res.json(ticket);
 };
+
+// Create a ticket
+exports.createTicket = (req, res) => {
+    const { title, description } = req.body;
+    if (!title || !description) {
+        return res.status(400).json({ error: "Title and description are required" });
+    }
+    const newTicket = { id: nextId++, title, description };
+    tickets.push(newTicket);
+    res.status(201).json(newTicket);
+};
