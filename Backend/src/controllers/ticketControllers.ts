@@ -29,3 +29,28 @@ export const createTicket = (req: Request, res: Response) => {
   tickets.push(newTicket);
   res.status(201).json(newTicket);
 };
+
+// Update a ticket
+export const updateTicket = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { title, description, status} = req.body;
+  const ticket = tickets.find((t: Ticket) => t.id === parseInt(id as string));
+  if (!ticket) {
+    return res.status(404).json({ error: "Ticket not found" });
+  }
+  if (title) ticket.title = title;
+  if (description) ticket.description = description;
+  if (status) ticket.status = status;
+  res.json(ticket);
+};
+
+// Delete a ticket
+export const deleteTicket = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const index = tickets.findIndex((t: Ticket) => t.id === parseInt(id as string));
+  if (index === -1) {
+    return res.status(404).json({ error: "Ticket not found" });
+  }
+  tickets.splice(index, 1);
+  res.status(204).send();
+};
