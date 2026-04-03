@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ticketRoutes = require("./routes/ticketRoutes");
+import type { Request, Response} from "express";
 
 // middleware to parse JSON
 // app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("API is running...");
 });
 
@@ -26,7 +27,7 @@ app.listen(PORT, () => {
 
 /*
 // Create a ticket
-app.post("/tickets", (req, res) => {
+app.post("/tickets", (req: Request, res: Response) => {
   const { title, description } = req.body;
   if (!title || !description) {
     return res.status(400).json({ error: "Title and description are required" });
@@ -36,7 +37,7 @@ app.post("/tickets", (req, res) => {
   res.status(201).json(newTicket);
 });
 // Get a single ticket
-app.get("/tickets/:id", (req, res) => {
+app.get("/tickets/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const ticket = tickets.find((t) => t.id === parseInt(id));
   if (!ticket) {
@@ -46,7 +47,7 @@ app.get("/tickets/:id", (req, res) => {
 });
 
 // Update a ticket
-app.put("/tickets/:id", (req, res) => {
+app.put("/tickets/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const { title, description } = req.body;
   const ticket = tickets.find((t) => t.id === parseInt(id));
@@ -59,7 +60,7 @@ app.put("/tickets/:id", (req, res) => {
 });
 
 // Delete a ticket
-app.delete("/tickets/:id", (req, res) => {
+app.delete("/tickets/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const index = tickets.findIndex((t) => t.id === parseInt(id));
   if (index === -1) {
